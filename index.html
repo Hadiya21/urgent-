@@ -251,27 +251,7 @@ function closeModal() {
   document.getElementById("termsModal").style.display = "none";
 }
 
-  // Countdown to March 14, 9:00 AM
-  const targetDate = new Date("March 14, 2026 09:00:00").getTime();
-
-  setInterval(() => {
-    const now = new Date().getTime();
-    const diff = targetDate - now;
-
-    if (diff <= 0) {
-      document.getElementById("countdown").innerHTML =
-        "💞 We're finally together! 💞";
-      return;
-    }
-
-    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    const m = Math.floor((diff / (1000 * 60)) % 60);
-    const s = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("countdown").innerHTML =
-      `⏳ Countdown to our next visit:<br>${d}d ${h}h ${m}m ${s}s 💕`;
-  }, 1000);
+ 
 </script>
 
 </body>
