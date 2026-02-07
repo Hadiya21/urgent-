@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Valentine 💖</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .card {
+    background: white;
+    padding: 30px 22px;
+    border-radius: 20px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  }
+
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 12px;
+  }
+
+  .message {
+    font-size: 18px;
+    color: #ff4d6d;
+    margin-bottom: 16px;
+  }
+
+  .countdown {
+    font-size: 16px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>💘 It’s Official 💘</h1>
+  <div class="message">
+    💕 You’re officially my Valentine forever 💕
+  </div>
+  <div class="countdown" id="countdown"></div>
+</div>
+
+<script>
+  const targetDate = new Date("March 14, 2026 09:00:00").getTime();
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown").innerHTML =
+        "💞 We're finally together! 💞";
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+      `⏳ Countdown to our next visit:<br>${d}d ${h}h ${m}m ${s}s 💕`;
+  }, 1000);
+</script>
+
+</body>
+</html>
