@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💖</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* Floating hearts */
+  .hearts span {
+    position: absolute;
+    bottom: -50px;
+    font-size: 18px;
+    color: rgba(255, 77, 109, 0.25);
+    animation: floatUp 10s linear infinite;
+  }
+
+  .hearts span:nth-child(odd) {
+    animation-duration: 14s;
+    font-size: 14px;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    10% { opacity: 1; }
+    to {
+      transform: translateY(-110vh);
+      opacity: 0;
+    }
+  }
+
+  .container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .card {
+    background: white;
+    width: 100%;
+    max-width: 360px;
+    padding: 28px 22px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    z-index: 2;
+  }
+
+  h1 {
+    color: #ff4d6d;
+    margin-bottom: 6px;
+  }
+
+  p {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+
+  input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  .checkbox {
+    font-size: 12px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .checkbox input {
+    transform: scale(0.85);
+  }
+
+  button {
+    width: 100%;
+    padding: 13px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+
+  button:hover {
+    background: #e8435f;
+  }
+
+  .terms {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+
+  .terms a {
+    color: #ff4d6d;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .message {
+    margin-top: 16px;
+    font-size: 16px;
+    color: #ff4d6d;
+  }
+
+  .countdown {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  /* Modal */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  .modal-content {
+    background: white;
+    padding: 22px;
+    width: 90%;
+    max-width: 320px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .modal-content h3 {
+    color: #ff4d6d;
+    margin-bottom: 10px;
+  }
+
+  .modal-content p {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .close {
+    margin-top: 14px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Floating Hearts -->
+<div class="hearts">
+  <span style="left:5%">💗</span>
+  <span style="left:15%">💖</span>
+  <span style="left:30%">💗</span>
+  <span style="left:45%">💖</span>
+  <span style="left:60%">💗</span>
+  <span style="left:75%">💖</span>
+  <span style="left:90%">💗</span>
+</div>
+
+<div class="container">
+  <div class="card">
+    <h1>Be My Valentine 💘</h1>
+    <p>Sign up to officially be mine forever</p>
+
+    <form id="valentineForm">
+      <input type="text" placeholder="Your name 💕" required>
+      <input type="email" placeholder="Your email 💌" required>
+      <input type="tel" placeholder="Your number 📞" required>
+
+      <div class="checkbox">
+        <input type="checkbox" required>
+        <label>I promise to be yours forever</label>
+      </div>
+
+      <button type="submit">Sign Up 💖</button>
+    </form>
+
+    <div class="terms">
+      <a onclick="openModal()">Terms & Conditions</a>
+    </div>
+
+    <div id="successMessage" class="hidden">
+      <div class="message">
+        💕 You’re officially my Valentine forever 💕
+      </div>
+      <div class="countdown" id="countdown"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="termsModal" class="modal hidden">
+  <div class="modal-content">
+    <h3>Terms & Conditions 💌</h3>
+    <p>
+      1. Unlimited love, loyalty & laughter<br>
+      2. Daily messages are mandatory<br>
+      3. Hugs will be collected with interest<br>
+      4. This contract lasts forever 💖
+    </p>
+    <button class="close" onclick="closeModal()">Okay 💕</button>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById("valentineForm");
+  const successMessage = document.getElementById("successMessage");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    form.classList.add("hidden");
+    successMessage.classList.remove("hidden");
+  });
+
+  function openModal() {
+    document.getElementById("termsModal").classList.remove("hidden");
+  }
+
+  function closeModal() {
+    document.getElementById("termsModal").classList.add("hidden");
+  }
+
+  // Countdown to March 14, 9:00 AM
+  const targetDate = new Date("March 14, 2026 09:00:00").getTime();
+
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+      document.getElementById("countdown").innerHTML =
+        "💞 We're finally together! 💞";
+      return;
+    }
+
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const m = Math.floor((diff / (1000 * 60)) % 60);
+    const s = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+      `⏳ Countdown to our next visit:<br>${d}d ${h}h ${m}m ${s}s 💕`;
+  }, 1000);
+</script>
+
+</body>
+</html>
