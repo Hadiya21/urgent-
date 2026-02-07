@@ -224,16 +224,18 @@
 </div>
 
 <!-- Modal -->
-<div id="termsModal" class="modal hidden">
-  <div class="modal-content">
-    <h3>Terms & Conditions 💌</h3>
-    <p>
+<div id="termsModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:999; align-items:center; justify-content:center;">
+  <div style="background:white; padding:22px; width:90%; max-width:320px; border-radius:16px; text-align:center;">
+    <h3 style="color:#ff4d6d; margin-bottom:10px;">Terms & Conditions 💌</h3>
+    <p style="font-size:14px; line-height:1.5;">
       1. Unlimited love, loyalty & laughter<br>
       2. Daily messages are mandatory<br>
       3. Hugs will be collected with interest<br>
       4. This contract lasts forever 💖
     </p>
-    <button class="close" onclick="closeModal()">Okay 💕</button>
+    <button onclick="closeModal()" style="margin-top:14px; background:#ff4d6d; color:white; border:none; padding:8px 16px; border-radius:10px;">
+      Okay 💕
+    </button>
   </div>
 </div>
 
@@ -247,13 +249,13 @@
     successMessage.classList.remove("hidden");
   });
 
-  function openModal() {
-    document.getElementById("termsModal").classList.remove("hidden");
-  }
+function openModal() {
+  document.getElementById("termsModal").style.display = "flex";
+}
 
-  function closeModal() {
-    document.getElementById("termsModal").classList.add("hidden");
-  }
+function closeModal() {
+  document.getElementById("termsModal").style.display = "none";
+}
 
   // Countdown to March 14, 9:00 AM
   const targetDate = new Date("March 14, 2026 09:00:00").getTime();
